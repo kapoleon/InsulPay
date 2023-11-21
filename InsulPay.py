@@ -32,8 +32,9 @@ class ApplicationDatabase:
 
     def disconnect(self):
         try:
-            self.conn.close()
-            print("Database disconnected successfully!")
+            if self.conn:
+                self.conn.close()
+                print("Database disconnected successfully!")
         except Exception as e:
             print(f"Error disconnecting to the database: {e}")
 
