@@ -1,4 +1,4 @@
-from scripts.employee_table import EmployeeTable
+from scripts.database.tables.employee_table import EmployeeTable
 import customtkinter as ctk
 from tkinter import messagebox
 

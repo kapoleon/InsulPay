@@ -1,6 +1,6 @@
 # employee_table.py
 
-from scripts.base_table import BaseTable
+from scripts.database.tables.base_table import BaseTable
 
 
 class EmployeeTable(BaseTable):

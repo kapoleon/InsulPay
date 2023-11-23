@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from tkinter import messagebox
-from scripts.batt_pay_rate_table import BattPayRateTable
+from scripts.database.tables.batt_pay_rate_table import BattPayRateTable
 
 
 # Batt Pay Rate Management Windows

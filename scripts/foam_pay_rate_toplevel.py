@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from tkinter import messagebox
-from scripts.foam_pay_rate_table import FoamPayRateTable
+from scripts.database.tables.foam_pay_rate_table import FoamPayRateTable
 
 
 # Foam Pay Rate Management Windows

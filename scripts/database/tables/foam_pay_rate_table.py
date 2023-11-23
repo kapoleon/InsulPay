@@ -1,6 +1,6 @@
 # foam_pay_rate_table.py
 
-from scripts.base_table import BaseTable
+from scripts.database.tables.base_table import BaseTable
 
 class FoamPayRateTable(BaseTable):
     def create_table(self):

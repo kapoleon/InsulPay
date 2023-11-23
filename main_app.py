@@ -1,4 +1,4 @@
-from scripts.insulpay_imports import *
+from scripts.settings.program_settings import *
 
 
 class MainApplication(ctk.CTk):
@@ -16,8 +16,12 @@ class MainApplication(ctk.CTk):
         self.create_widgets()
 
     def create_widgets(self):
+        self.create_pay_sheet_widgets()
+        self.create_work_order_widgets()
+
+    def create_pay_sheet_widgets(self):
         create_pay_sheet_label = ctk.CTkLabel(self, text="Create Pay Sheet")
-        create_pay_sheet_label.grid(row=0, column=0, padx=10, pady=10)
+        create_pay_sheet_label.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
 
         batt_pay_sheet_button = ctk.CTkButton(self, text="Batt Pay Sheet", command=self.open_batt_pay_sheet_toplevel)
         batt_pay_sheet_button.grid(row=1, column=0, padx=10, pady=10)
@@ -30,11 +34,14 @@ class MainApplication(ctk.CTk):
 
         vacation_request_button = ctk.CTkButton(self, text="Vacation Request",
                                                 command=self.open_vacation_request_toplevel)
-        vacation_request_button.grid(row=4, column=0, padx=10, pady=10)
+        vacation_request_button.grid(row=1, column=1, padx=10, pady=10)
 
         shop_pay_sheet_button = ctk.CTkButton(self, text="Shop Pay Sheet",
                                               command=self.open_shop_pay_sheet_toplevel)
-        shop_pay_sheet_button.grid(row=5, column=0, padx=10, pady=10)
+        shop_pay_sheet_button.grid(row=2, column=1, padx=10, pady=10)
+
+    def create_work_order_widgets(self):
+        pass
 
     @staticmethod
     def open_batt_pay_sheet_toplevel():

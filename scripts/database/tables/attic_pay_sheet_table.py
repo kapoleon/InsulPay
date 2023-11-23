@@ -1,4 +1,4 @@
-from scripts.base_table import BaseTable
+from scripts.database.tables.base_table import BaseTable
 
 class AtticPaySheetTable(BaseTable):
     def create_table(self):

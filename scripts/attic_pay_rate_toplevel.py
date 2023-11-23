@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from tkinter import messagebox
-from scripts.attic_pay_rate_table import AtticPayRateTable
+from scripts.database.tables.attic_pay_rate_table import AtticPayRateTable
 
 
 # Attic Pay Rate Management Windows
