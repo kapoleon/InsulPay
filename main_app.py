@@ -12,6 +12,20 @@ class MainApplication(ctk.CTk):
         self.menu_manager = MenuManager(self)
         self.menu_manager.create_main_menu()
 
+        # Create widgets
+        self.create_widgets()
+
+    def create_widgets(self):
+        create_pay_sheet_label = ctk.CTkLabel(self, text="Create Pay Sheet")
+        create_pay_sheet_label.grid(row=0, column=0, padx=10, pady=10)
+
+        batt_pay_sheet_button = ctk.CTkButton(self, text="Batt Pay Sheet", command=self.open_batt_pay_sheet_toplevel)
+        batt_pay_sheet_button.grid(row=1, column=0, padx=10, pady=10)
+
+    def open_batt_pay_sheet_toplevel(self):
+        window = BattPaySheetTopLevel()
+        window.grab_set()
+
     # Close the Application
     def on_closing(self):
         if messagebox.askokcancel("Quit", "Do you want to quit?"):

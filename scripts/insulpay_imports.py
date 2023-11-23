@@ -12,7 +12,6 @@ from scripts.batt_pay_rate_table import BattPayRateTable
 from scripts.attic_pay_rate_table import AtticPayRateTable
 from scripts.foam_pay_rate_table import FoamPayRateTable
 
-
 from scripts.employee_db_toplevel import AddEmployeeWindow, EditEmployeeWindow, DeleteEmployeeWindow, ViewEmployeeWindow
 from scripts.batt_pay_rate_toplevel import AddBattPayRateWindow, EditBattPayRateWindow, DeleteBattPayRateWindow, \
     ViewBattPayRateWindow
@@ -23,6 +22,10 @@ from scripts.foam_pay_rate_toplevel import AddFoamPayRateWindow, EditFoamPayRate
 
 from scripts.employee_class import Employee
 
+from scripts.batt_pay_sheet_toplevel import BattPaySheetTopLevel
+from scripts.attic_pay_sheet_toplevel import AtticPaySheetTopLevel
+from scripts.foam_pay_sheet_toplevel import FoamPaySheetTopLevel
+from scripts.vacation_request_toplevel import VacationRequestTopLevel
 
 # Set the appearance mode and default color theme for CustomTkinter
 ctk.set_appearance_mode("system")  # system, dark , light
