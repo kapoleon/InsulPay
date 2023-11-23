@@ -32,6 +32,10 @@ class MainApplication(ctk.CTk):
                                                 command=self.open_vacation_request_toplevel)
         vacation_request_button.grid(row=4, column=0, padx=10, pady=10)
 
+        shop_pay_sheet_button = ctk.CTkButton(self, text="Shop Pay Sheet",
+                                              command=self.open_shop_pay_sheet_toplevel)
+        shop_pay_sheet_button.grid(row=5, column=0, padx=10, pady=10)
+
     @staticmethod
     def open_batt_pay_sheet_toplevel():
         window = BattPaySheetTopLevel()
@@ -50,6 +54,11 @@ class MainApplication(ctk.CTk):
     @staticmethod
     def open_vacation_request_toplevel():
         window = VacationRequestTopLevel()
+        window.grab_set()
+
+    @staticmethod
+    def open_shop_pay_sheet_toplevel():
+        window = ShopPaySheetTopLevel()
         window.grab_set()
 
     # Close the Application
