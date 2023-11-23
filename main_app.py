@@ -22,8 +22,34 @@ class MainApplication(ctk.CTk):
         batt_pay_sheet_button = ctk.CTkButton(self, text="Batt Pay Sheet", command=self.open_batt_pay_sheet_toplevel)
         batt_pay_sheet_button.grid(row=1, column=0, padx=10, pady=10)
 
-    def open_batt_pay_sheet_toplevel(self):
+        attic_pay_sheet_button = ctk.CTkButton(self, text="Attic Pay Sheet", command=self.open_attic_pay_sheet_toplevel)
+        attic_pay_sheet_button.grid(row=2, column=0, padx=10, pady=10)
+
+        foam_pay_sheet_button = ctk.CTkButton(self, text="Foam Pay Sheet", command=self.open_foam_pay_sheet_toplevel)
+        foam_pay_sheet_button.grid(row=3, column=0, padx=10, pady=10)
+
+        vacation_request_button = ctk.CTkButton(self, text="Vacation Request",
+                                                command=self.open_vacation_request_toplevel)
+        vacation_request_button.grid(row=4, column=0, padx=10, pady=10)
+
+    @staticmethod
+    def open_batt_pay_sheet_toplevel():
         window = BattPaySheetTopLevel()
+        window.grab_set()
+
+    @staticmethod
+    def open_attic_pay_sheet_toplevel():
+        window = AtticPaySheetTopLevel()
+        window.grab_set()
+
+    @staticmethod
+    def open_foam_pay_sheet_toplevel():
+        window = FoamPaySheetTopLevel()
+        window.grab_set()
+
+    @staticmethod
+    def open_vacation_request_toplevel():
+        window = VacationRequestTopLevel()
         window.grab_set()
 
     # Close the Application
