@@ -10,6 +10,7 @@ from scripts.menu.menu_manager import MenuManager
 
 # Import the database tables
 from scripts.database.tables.employee_table import EmployeeTable
+from scripts.database.tables.batt_pay_rate_table import BattPayRateTable
 
 # Import paysheet toplevels
 from scripts.toplevel.batt_pay_sheet import BattPaySheetTopLevel
@@ -28,9 +29,11 @@ from scripts.toplevel.spray_foam_work_order import SprayFoamWorkOrder
 
 # Import Database notebooks
 from scripts.toplevel.employee_table_manager import EmployeeTableManager
+from scripts.toplevel.batt_rate_table_manager import BattPayRateTableManager
 
 # Import Database notebook tabs
 from scripts.tabs.employee_table_tabs import TabOne, TabTwo, TabThree, TabFour
+from scripts.tabs.batt_pay_rate_table_tabs import TabOne, TabTwo, TabThree, TabFour
 
 # Set the appearance mode and default color theme for CustomTkinter
 ctk.set_appearance_mode("system")  # system, dark , light

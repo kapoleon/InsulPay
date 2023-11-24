@@ -77,6 +77,14 @@ class MainApplication(ctk.CTk):
                                                       command=self.open_employee_table_manager_toplevel)
         employee_table_manager_button.grid(row=5, column=0, padx=10, pady=10)
 
+        batt_pay_rate_table_manager_button = ctk.CTkButton(self, text="Batt Pay Rate Table Manager",
+                                                              command=self.open_batt_pay_rate_table_manager_toplevel)
+        batt_pay_rate_table_manager_button.grid(row=6, column=0, padx=10, pady=10)
+
+    def open_batt_pay_rate_table_manager_toplevel(self):
+        window = BattPayRateTableManager(self)
+        window.grab_set()
+
     def open_employee_table_manager_toplevel(self):
         window = EmployeeTableManager(self)
         window.grab_set()
