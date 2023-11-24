@@ -1,7 +1,7 @@
 import customtkinter as ctk
 import tkinter as tk
 from tkinter import ttk
-from scripts.tabs.employee_table_tabs import TabOne, TabTwo
+from scripts.tabs.employee_table_tabs import TabOne, TabTwo, TabThree, TabFour
 
 
 class EmployeeTableManager:
@@ -15,10 +15,17 @@ class EmployeeTableManager:
 
     def create_tabs(self):
         tab_one = TabOne(self.notebook)
-        self.notebook.add(tab_one.frame, text="Tab One")
+        self.notebook.add(tab_one.frame, text="Add Employee")
 
         tab_two = TabTwo(self.notebook)
-        self.notebook.add(tab_two.frame, text="Tab Two")
+        self.notebook.add(tab_two.frame, text="Edit Employee")
+
+        tab_three = TabThree(self.notebook)
+        self.notebook.add(tab_three.frame, text="Delete Employee")
+
+        tab_four = TabFour(self.notebook)
+        self.notebook.add(tab_four.frame, text="View Employees")
+
 
     def pack(self):
         self.notebook.pack(expand=True, fill='both')

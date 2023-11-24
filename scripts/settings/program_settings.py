@@ -8,6 +8,9 @@ from tkinter import messagebox, filedialog
 # Import the custom menu
 from scripts.menu.menu_manager import MenuManager
 
+# Import the database tables
+from scripts.database.tables.employee_table import EmployeeTable
+
 # Import paysheet toplevels
 from scripts.toplevel.batt_pay_sheet import BattPaySheetTopLevel
 from scripts.toplevel.attic_pay_sheet import AtticPaySheetTopLevel
@@ -27,7 +30,7 @@ from scripts.toplevel.spray_foam_work_order import SprayFoamWorkOrder
 from scripts.toplevel.employee_table_manager import EmployeeTableManager
 
 # Import Database notebook tabs
-from scripts.tabs.employee_table_tabs import TabOne, TabTwo
+from scripts.tabs.employee_table_tabs import TabOne, TabTwo, TabThree, TabFour
 
 # Set the appearance mode and default color theme for CustomTkinter
 ctk.set_appearance_mode("system")  # system, dark , light
