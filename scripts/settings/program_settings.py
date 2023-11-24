@@ -31,11 +31,13 @@ from scripts.toplevel.spray_foam_work_order import SprayFoamWorkOrder
 from scripts.toplevel.employee_table_manager import EmployeeTableManager
 from scripts.toplevel.batt_rate_table_manager import BattPayRateTableManager
 from scripts.toplevel.attic_rate_table_manager import AtticPayRateTableManager
+from scripts.toplevel.foam_rate_table_manager import FoamPayRateTableManager
 
 # Import Database notebook tabs
 from scripts.tabs.employee_table_tabs import TabOne, TabTwo, TabThree, TabFour
 from scripts.tabs.batt_pay_rate_table_tabs import TabOne, TabTwo, TabThree, TabFour
 from scripts.tabs.attic_pay_rate_table_tabs import TabOne, TabTwo, TabThree, TabFour
+from scripts.tabs.foam_pay_rate_table_tabs import TabOne, TabTwo, TabThree, TabFour
 
 # Set the appearance mode and default color theme for CustomTkinter
 ctk.set_appearance_mode("system")  # system, dark , light

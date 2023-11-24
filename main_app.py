@@ -78,12 +78,20 @@ class MainApplication(ctk.CTk):
         employee_table_manager_button.grid(row=5, column=0, padx=10, pady=10)
 
         batt_pay_rate_table_manager_button = ctk.CTkButton(self, text="Batt Pay Rate Table Manager",
-                                                              command=self.open_batt_pay_rate_table_manager_toplevel)
+                                                           command=self.open_batt_pay_rate_table_manager_toplevel)
         batt_pay_rate_table_manager_button.grid(row=6, column=0, padx=10, pady=10)
 
         attic_pay_rate_table_manager_button = ctk.CTkButton(self, text="Attic Pay Rate Table Manager",
-                                                              command=self.open_attic_pay_rate_table_manager_toplevel)
+                                                            command=self.open_attic_pay_rate_table_manager_toplevel)
         attic_pay_rate_table_manager_button.grid(row=7, column=0, padx=10, pady=10)
+
+        foam_pay_rate_table_manager_button = ctk.CTkButton(self, text="Foam Pay Rate Table Manager",
+                                                           command=self.open_foam_pay_rate_table_manager_toplevel)
+        foam_pay_rate_table_manager_button.grid(row=5, column=1, padx=10, pady=10)
+
+    def open_foam_pay_rate_table_manager_toplevel(self):
+        window = FoamPayRateTableManager(self)
+        window.grab_set()
 
     def open_attic_pay_rate_table_manager_toplevel(self):
         window = AtticPayRateTableManager(self)
