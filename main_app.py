@@ -41,7 +41,32 @@ class MainApplication(ctk.CTk):
         shop_pay_sheet_button.grid(row=2, column=1, padx=10, pady=10)
 
     def create_work_order_widgets(self):
-        pass
+        create_work_order_label = ctk.CTkLabel(self, text="Create Work Order")
+        create_work_order_label.grid(row=0, column=2, columnspan=2, padx=10, pady=10)
+
+        new_construction_button = ctk.CTkButton(self, text="New Construction",
+                                                command=self.open_new_construction_toplevel)
+        new_construction_button.grid(row=1, column=2, padx=10, pady=10)
+
+        existing_construction_button = ctk.CTkButton(self, text="Existing Construction",
+                                                     command=self.open_existing_construction_toplevel)
+        existing_construction_button.grid(row=2, column=2, padx=10, pady=10)
+
+        attic_work_order_button = ctk.CTkButton(self, text="Attic Work Order",
+                                                command=self.open_attic_work_order_toplevel)
+        attic_work_order_button.grid(row=3, column=2, padx=10, pady=10)
+
+        foam_work_order_button = ctk.CTkButton(self, text="Foam Work Order",
+                                               command=self.open_foam_work_order_toplevel)
+        foam_work_order_button.grid(row=1, column=3, padx=10, pady=10)
+
+        shop_work_order_button = ctk.CTkButton(self, text="Shop Work Order",
+                                               command=self.open_shop_work_order_toplevel)
+        shop_work_order_button.grid(row=2, column=3, padx=10, pady=10)
+
+        cellulose_work_order_button = ctk.CTkButton(self, text="Cellulose Work Order",
+                                                    command=self.open_cellulose_work_order_toplevel)
+        cellulose_work_order_button.grid(row=3, column=3, padx=10, pady=10)
 
     @staticmethod
     def open_batt_pay_sheet_toplevel():
@@ -66,6 +91,36 @@ class MainApplication(ctk.CTk):
     @staticmethod
     def open_shop_pay_sheet_toplevel():
         window = ShopPaySheetTopLevel()
+        window.grab_set()
+
+    @staticmethod
+    def open_new_construction_toplevel():
+        window = NewConstructionWorkOrder()
+        window.grab_set()
+
+    @staticmethod
+    def open_existing_construction_toplevel():
+        window = ExistingConstructionWorkOrder()
+        window.grab_set()
+
+    @staticmethod
+    def open_attic_work_order_toplevel():
+        window = AtticWorkOrder()
+        window.grab_set()
+
+    @staticmethod
+    def open_foam_work_order_toplevel():
+        window = SprayFoamWorkOrder()
+        window.grab_set()
+
+    @staticmethod
+    def open_shop_work_order_toplevel():
+        window = ShopWorkOrder()
+        window.grab_set()
+
+    @staticmethod
+    def open_cellulose_work_order_toplevel():
+        window = CelluloseWorkOrder()
         window.grab_set()
 
     # Close the Application
