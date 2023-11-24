@@ -18,6 +18,7 @@ class MainApplication(ctk.CTk):
     def create_widgets(self):
         self.create_pay_sheet_widgets()
         self.create_work_order_widgets()
+        self.create_database_manager()
 
     def create_pay_sheet_widgets(self):
         create_pay_sheet_label = ctk.CTkLabel(self, text="Create Pay Sheet")
@@ -67,6 +68,18 @@ class MainApplication(ctk.CTk):
         cellulose_work_order_button = ctk.CTkButton(self, text="Cellulose Work Order",
                                                     command=self.open_cellulose_work_order_toplevel)
         cellulose_work_order_button.grid(row=3, column=3, padx=10, pady=10)
+
+    def create_database_manager(self):
+        database_manager_label = ctk.CTkLabel(self, text="Database Manager")
+        database_manager_label.grid(row=4, column=0, columnspan=2, padx=10, pady=10)
+
+        employee_table_manager_button = ctk.CTkButton(self, text="Employee Table Manager",
+                                                      command=self.open_employee_table_manager_toplevel)
+        employee_table_manager_button.grid(row=5, column=0, padx=10, pady=10)
+
+    def open_employee_table_manager_toplevel(self):
+        window = EmployeeTableManager(self)
+        window.grab_set()
 
     @staticmethod
     def open_batt_pay_sheet_toplevel():

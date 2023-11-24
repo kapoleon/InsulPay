@@ -23,6 +23,12 @@ from scripts.toplevel.shop_work_order import ShopWorkOrder
 from scripts.toplevel.cellulose_work_order import CelluloseWorkOrder
 from scripts.toplevel.spray_foam_work_order import SprayFoamWorkOrder
 
+# Import Database notebooks
+from scripts.toplevel.employee_table_manager import EmployeeTableManager
+
+# Import Database notebook tabs
+from scripts.tabs.employee_table_tabs import TabOne, TabTwo
+
 # Set the appearance mode and default color theme for CustomTkinter
 ctk.set_appearance_mode("system")  # system, dark , light
 ctk.set_default_color_theme("dark-blue")  # Themes: "blue" (standard), "green", "dark-blue"
