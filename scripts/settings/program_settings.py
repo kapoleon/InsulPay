@@ -8,6 +8,9 @@ from tkinter import messagebox, filedialog
 # Import the custom menu
 from scripts.menu.menu_manager import MenuManager
 
+# Import the Employee class
+from scripts.employee_class import Employee
+
 # Import the database tables
 from scripts.database.tables.employee_table import EmployeeTable
 from scripts.database.tables.batt_pay_rate_table import BattPayRateTable
