@@ -27,8 +27,6 @@ class BattPayRateTable(BaseTable):
             print("Batt Pay Rate added successfully!")
         except Exception as e:
             print(f"Error adding batt pay rate: {e}")
-        finally:
-            self.disconnect()
 
     def edit_batt_pay_rate(self, batt_pay_rate_name, new_batt_pay_rate_name, new_batt_pay_rate_amount,
                            new_batt_pay_rate_description):
@@ -41,8 +39,6 @@ class BattPayRateTable(BaseTable):
             print("Batt Pay Rate edited successfully!")
         except Exception as e:
             print(f"Error editing batt pay rate: {e}")
-        finally:
-            self.disconnect()
 
     def delete_batt_pay_rate(self, batt_pay_rate_name):
         try:
@@ -52,8 +48,6 @@ class BattPayRateTable(BaseTable):
             print("Batt Pay Rate deleted successfully!")
         except Exception as e:
             print(f"Error deleting batt pay rate: {e}")
-        finally:
-            self.disconnect()
 
     def view_batt_pay_rate(self, batt_pay_rate_name):
         try:
@@ -63,8 +57,6 @@ class BattPayRateTable(BaseTable):
             return batt_pay_rate_data
         except Exception as e:
             print(f"Error viewing batt pay rate: {e}")
-        finally:
-            self.disconnect()
 
     def view_all_batt_pay_rates(self):
         try:
@@ -73,5 +65,3 @@ class BattPayRateTable(BaseTable):
             return batt_pay_rate_data
         except Exception as e:
             print(f"Error viewing all batt pay rates: {e}")
-        finally:
-            self.disconnect()

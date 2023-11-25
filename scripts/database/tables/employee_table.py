@@ -26,8 +26,6 @@ class EmployeeTable(BaseTable):
             print("Employee added successfully!")
         except Exception as e:
             print(f"Error adding employee: {e}")
-        finally:
-            self.disconnect()
 
     def edit_employee(self, first_name, last_name, new_first_name, new_last_name, new_vacation_days):
         try:
@@ -39,8 +37,6 @@ class EmployeeTable(BaseTable):
             print("Employee edited successfully!")
         except Exception as e:
             print(f"Error editing employee: {e}")
-        finally:
-            self.disconnect()
 
     def delete_employee(self, first_name, last_name):
         try:
@@ -50,8 +46,6 @@ class EmployeeTable(BaseTable):
             print("Employee deleted successfully!")
         except Exception as e:
             print(f"Error deleting employee: {e}")
-        finally:
-            self.disconnect()
 
     def view_employee(self, first_name, last_name):
         try:
@@ -61,8 +55,6 @@ class EmployeeTable(BaseTable):
             return employee_data
         except Exception as e:
             print(f"Error viewing employee: {e}")
-        finally:
-            self.disconnect()
 
     def view_all_employees(self):
         try:
@@ -71,5 +63,11 @@ class EmployeeTable(BaseTable):
             return employee_data
         except Exception as e:
             print(f"Error viewing all employees: {e}")
-        finally:
-            self.disconnect()
+
+    def view_employee_by_id(self, employee_id):
+        try:
+            self.cursor.execute("""SELECT * FROM employees WHERE employee_id = ?;""", (employee_id,))
+            employee_data = self.cursor.fetchone()
+            return employee_data
+        except Exception as e:
+            print(f"Error viewing employee by ID: {e}")
