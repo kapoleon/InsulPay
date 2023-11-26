@@ -20,6 +20,9 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
         # Retrieve bay pay rate information
         self.rates = self.create_batt_pay_rate_database_instance()
 
+        # Create the  list for variables for the checkboxes
+        self.checkbox_vars = []
+
         # Create widgets using database information
         self.create_widgets()
 
@@ -70,10 +73,21 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
         return rates
 
     def create_widgets(self):
+
         # Create checkboxes for each employee
         for i, employee in enumerate(self.employees):
             if employee:
-                checkbox = ctk.CTkCheckBox(self, text=f"{employee[1]} {employee[2]}", font=self.font)
+                checkbox_var = ctk.IntVar(value=0)
+                self.checkbox_vars.append(checkbox_var)
+
+                # Create the checkbox
+                checkbox = ctk.CTkCheckBox(self,
+                                           text=f"{employee[1]} {employee[2]}",
+                                           font=self.font,
+                                           variable=checkbox_var,
+                                           onvalue=1,
+                                           offvalue=0,
+                                           command=self.checkbox_clicked)
                 checkbox.grid(row=i, column=0, padx=10, pady=10)
 
         # Create the label and entry for the bay pay rate widgets
@@ -84,6 +98,13 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
 
                 entry = ctk.CTkEntry(self)
                 entry.grid(row=i, column=2, padx=10, pady=10)
+
+
+    def checkbox_clicked(self):
+        for i, checkbox_var in enumerate(self.checkbox_vars):
+            if checkbox_var.get() == 1:
+                print(f"Checkbox {i + 1} is checked.")
+
 
     def on_closing(self):
         self.destroy()
