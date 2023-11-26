@@ -9,7 +9,7 @@ from tkinter import messagebox, filedialog
 from scripts.menu.menu_manager import MenuManager
 
 # Import the Employee class
-from scripts.employee_class import Employee
+from scripts.otherclass.employee_class import Employee
 
 # Import the database tables
 from scripts.database.tables.employee_table import EmployeeTable

@@ -65,3 +65,12 @@ class BattPayRateTable(BaseTable):
             return batt_pay_rate_data
         except Exception as e:
             print(f"Error viewing all batt pay rates: {e}")
+
+    def view_batt_pay_rate_by_id(self, batt_pay_rate_id):
+        try:
+            self.cursor.execute("""SELECT * FROM batt_pay_rates WHERE batt_pay_rate_id = ?;""", (batt_pay_rate_id,))
+            batt_pay_rate_data = self.cursor.fetchone()
+            return batt_pay_rate_data
+        except Exception as e:
+            print(f"Error viewing batt pay rate by id: {e}")
+
