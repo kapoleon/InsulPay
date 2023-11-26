@@ -1,6 +1,9 @@
 from scripts.settings.program_settings import *
 
 
+# Run the script that performs necessary checks and runs
+# check_and_run()
+
 class MainApplication(ctk.CTk):
     def __init__(self):
         super().__init__()

@@ -18,7 +18,7 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
         self.employees = self.create_employee_db_instance()
 
         # Retrieve bay pay rate information
-        self.rates = self.create_bay_pay_rate_database_instance()
+        self.rates = self.create_batt_pay_rate_database_instance()
 
         # Create widgets using database information
         self.create_widgets()
@@ -47,7 +47,7 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
         return employees
 
     @staticmethod
-    def create_bay_pay_rate_database_instance():
+    def create_batt_pay_rate_database_instance():
         batt_pay_rate_table = BattPayRateTable()
         batt_pay_rate_table.connect()
 
@@ -77,7 +77,7 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
                 checkbox.grid(row=i, column=0, padx=10, pady=10)
 
         # Create the label and entry for the bay pay rate widgets
-        for i, rate in enumerate(self.create_bay_pay_rate_database_instance()):
+        for i, rate in enumerate(self.rates):
             if rate:
                 label = ctk.CTkLabel(self, text=f"{rate[1]}:", font=self.font)
                 label.grid(row=i, column=1, padx=10, pady=10)

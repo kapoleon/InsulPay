@@ -42,6 +42,9 @@ from scripts.tabs.batt_pay_rate_table_tabs import TabOne, TabTwo, TabThree, TabF
 from scripts.tabs.attic_pay_rate_table_tabs import TabOne, TabTwo, TabThree, TabFour
 from scripts.tabs.foam_pay_rate_table_tabs import TabOne, TabTwo, TabThree, TabFour
 
+# run the script that perform necessary checks and runs
+from scripts.settings.check_and_run import check_and_run
+
 # Set the appearance mode and default color theme for CustomTkinter
 ctk.set_appearance_mode("system")  # system, dark , light
 ctk.set_default_color_theme("dark-blue")  # Themes: "blue" (standard), "green", "dark-blue"
