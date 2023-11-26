@@ -5,19 +5,28 @@ from scripts.database.tables.batt_pay_rate_table import BattPayRateTable
 
 
 def check_and_run():
+    print("Checking for database file...")
     # Specify the path to your SQLite database file
     db_file_path = 'InsulPay.db'
 
     if not os.path.exists(db_file_path):
+        print("Database file not found. Creating database file...")
         create_database()
+
+    else:
+        print("Database file found. Continuing...")
 
 
 def create_database():
     # Create 10 employees to test the database
+    print("Creating employee table...")
     employee_table = EmployeeTable()
+    print("Connecting to database...")
     employee_table.connect()
+    print("Creating table...")
     employee_table.create_table()
 
+    print("Adding employees...")
     employee_table.add_employee("New", "Employee 1", 5)
     employee_table.add_employee("New", "Employee 2", 5)
     employee_table.add_employee("New", "Employee 3", 5)
@@ -29,13 +38,18 @@ def create_database():
     employee_table.add_employee("New", "Employee 9", 5)
     employee_table.add_employee("New", "Employee 10", 5)
 
+    print("Disconnecting from database...")
     employee_table.disconnect()
 
     # Create 11 batt pay rates to test the database
+    print("Creating batt pay rate table...")
     batt_pay_rate_table = BattPayRateTable()
+    print("Connecting to database...")
     batt_pay_rate_table.connect()
+    print("Creating table...")
     batt_pay_rate_table.create_table()
 
+    print("Adding batt pay rates...")
     batt_pay_rate_table.add_batt_pay_rate("Pay Rate 1", 5, "Pay Rate 1 Description")
     batt_pay_rate_table.add_batt_pay_rate("Pay Rate 2", 5, "Pay Rate 2 Description")
     batt_pay_rate_table.add_batt_pay_rate("Pay Rate 3", 5, "Pay Rate 3 Description")
@@ -48,4 +62,5 @@ def create_database():
     batt_pay_rate_table.add_batt_pay_rate("Pay Rate 10", 5, "Pay Rate 10 Description")
     batt_pay_rate_table.add_batt_pay_rate("Pay Rate 11", 5, "Pay Rate 11 Description")
 
+    print("Disconnecting from database...")
     batt_pay_rate_table.disconnect()
