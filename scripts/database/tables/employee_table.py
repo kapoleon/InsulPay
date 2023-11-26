@@ -11,7 +11,7 @@ class EmployeeTable(BaseTable):
                                                 first_name TEXT NOT NULL,
                                                 last_name TEXT NOT NULL,
                                                 vacation_days INTEGER NOT NULL,
-                                                UNIQUE(first_name, last_name)
+                                                UNIQUE(employee_id)
                                             );""")
             self.conn.commit()
             print("Employee table created successfully!")

@@ -2,6 +2,8 @@ import os
 from scripts.database.tables.base_table import BaseTable
 from scripts.database.tables.employee_table import EmployeeTable
 from scripts.database.tables.batt_pay_rate_table import BattPayRateTable
+from scripts.database.tables.attic_pay_rate_table import AtticPayRateTable
+from scripts.database.tables.foam_pay_rate_table import FoamPayRateTable
 
 
 def check_and_run():
@@ -64,3 +66,51 @@ def create_database():
 
     print("Disconnecting from database...")
     batt_pay_rate_table.disconnect()
+
+    # Create 11 attic pay rates to test the database
+    print("Creating attic pay rate table...")
+    attic_pay_rate_table = AtticPayRateTable()
+    print("Connecting to database...")
+    attic_pay_rate_table.connect()
+    print("Creating table...")
+    attic_pay_rate_table.create_table()
+
+    print("Adding attic pay rates...")
+    attic_pay_rate_table.add_attic_pay_rate("Pay Rate 1", 5, "Pay Rate 1 Description")
+    attic_pay_rate_table.add_attic_pay_rate("Pay Rate 2", 5, "Pay Rate 2 Description")
+    attic_pay_rate_table.add_attic_pay_rate("Pay Rate 3", 5, "Pay Rate 3 Description")
+    attic_pay_rate_table.add_attic_pay_rate("Pay Rate 4", 5, "Pay Rate 4 Description")
+    attic_pay_rate_table.add_attic_pay_rate("Pay Rate 5", 5, "Pay Rate 5 Description")
+    attic_pay_rate_table.add_attic_pay_rate("Pay Rate 6", 5, "Pay Rate 6 Description")
+    attic_pay_rate_table.add_attic_pay_rate("Pay Rate 7", 5, "Pay Rate 7 Description")
+    attic_pay_rate_table.add_attic_pay_rate("Pay Rate 8", 5, "Pay Rate 8 Description")
+    attic_pay_rate_table.add_attic_pay_rate("Pay Rate 9", 5, "Pay Rate 9 Description")
+    attic_pay_rate_table.add_attic_pay_rate("Pay Rate 10", 5, "Pay Rate 10 Description")
+    attic_pay_rate_table.add_attic_pay_rate("Pay Rate 11", 5, "Pay Rate 11 Description")
+
+    print("Disconnecting from database...")
+    attic_pay_rate_table.disconnect()
+
+    # Create 11 foam pay rates to test the database
+    print("Creating foam pay rate table...")
+    foam_pay_rate_table = FoamPayRateTable()
+    print("Connecting to database...")
+    foam_pay_rate_table.connect()
+    print("Creating table...")
+    foam_pay_rate_table.create_table()
+
+    print("Adding foam pay rates...")
+    foam_pay_rate_table.add_foam_pay_rate("Pay Rate 1", 5, "Pay Rate 1 Description")
+    foam_pay_rate_table.add_foam_pay_rate("Pay Rate 2", 5, "Pay Rate 2 Description")
+    foam_pay_rate_table.add_foam_pay_rate("Pay Rate 3", 5, "Pay Rate 3 Description")
+    foam_pay_rate_table.add_foam_pay_rate("Pay Rate 4", 5, "Pay Rate 4 Description")
+    foam_pay_rate_table.add_foam_pay_rate("Pay Rate 5", 5, "Pay Rate 5 Description")
+    foam_pay_rate_table.add_foam_pay_rate("Pay Rate 6", 5, "Pay Rate 6 Description")
+    foam_pay_rate_table.add_foam_pay_rate("Pay Rate 7", 5, "Pay Rate 7 Description")
+    foam_pay_rate_table.add_foam_pay_rate("Pay Rate 8", 5, "Pay Rate 8 Description")
+    foam_pay_rate_table.add_foam_pay_rate("Pay Rate 9", 5, "Pay Rate 9 Description")
+    foam_pay_rate_table.add_foam_pay_rate("Pay Rate 10", 5, "Pay Rate 10 Description")
+    foam_pay_rate_table.add_foam_pay_rate("Pay Rate 11", 5, "Pay Rate 11 Description")
+
+    print("Disconnecting from database...")
+    foam_pay_rate_table.disconnect()

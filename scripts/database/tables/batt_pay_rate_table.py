@@ -73,4 +73,3 @@ class BattPayRateTable(BaseTable):
             return batt_pay_rate_data
         except Exception as e:
             print(f"Error viewing batt pay rate by id: {e}")
-

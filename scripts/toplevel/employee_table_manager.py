@@ -26,7 +26,6 @@ class EmployeeTableManager:
         tab_four = TabFour(self.notebook)
         self.notebook.add(tab_four.frame, text="View Employees")
 
-
     def pack(self):
         self.notebook.pack(expand=True, fill='both')
 

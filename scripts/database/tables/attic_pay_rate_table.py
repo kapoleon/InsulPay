@@ -11,7 +11,7 @@ class AtticPayRateTable(BaseTable):
                                     attic_pay_rate_name TEXT NOT NULL,
                                     attic_pay_rate_amount REAL NOT NULL,
                                     attic_pay_rate_description TEXT NOT NULL,
-                                    UNIQUE(attic_pay_rate_name)
+                                    UNIQUE(attic_pay_rate_id)
                                 );""")
             self.conn.commit()
             print("Attic Pay Rate table created successfully!")
@@ -27,8 +27,6 @@ class AtticPayRateTable(BaseTable):
             print("Attic Pay Rate added successfully!")
         except Exception as e:
             print(f"Error adding attic pay rate: {e}")
-        finally:
-            self.disconnect()
 
     def edit_attic_pay_rate(self, attic_pay_rate_name, new_attic_pay_rate_name, new_attic_pay_rate_amount,
                             new_attic_pay_rate_description):
@@ -42,8 +40,6 @@ class AtticPayRateTable(BaseTable):
             print("Attic Pay Rate edited successfully!")
         except Exception as e:
             print(f"Error editing attic pay rate: {e}")
-        finally:
-            self.disconnect()
 
     def delete_attic_pay_rate(self, attic_pay_rate_name):
         try:
@@ -53,8 +49,6 @@ class AtticPayRateTable(BaseTable):
             print("Attic Pay Rate deleted successfully!")
         except Exception as e:
             print(f"Error deleting attic pay rate: {e}")
-        finally:
-            self.disconnect()
 
     def view_attic_pay_rate(self, attic_pay_rate_name):
         try:
@@ -64,8 +58,6 @@ class AtticPayRateTable(BaseTable):
             return attic_pay_rate_data
         except Exception as e:
             print(f"Error viewing attic pay rate: {e}")
-        finally:
-            self.disconnect()
 
     def view_all_attic_pay_rates(self):
         try:
@@ -74,5 +66,12 @@ class AtticPayRateTable(BaseTable):
             return attic_pay_rate_data
         except Exception as e:
             print(f"Error viewing all attic pay rates: {e}")
-        finally:
-            self.disconnect()
+
+    def view_attic_pay_rate_by_id(self, attic_pay_rate_id):
+        try:
+            self.cursor.execute("""SELECT * FROM attic_pay_rates WHERE attic_pay_rate_id = ?;""",
+                                (attic_pay_rate_id,))
+            attic_pay_rate_data = self.cursor.fetchone()
+            return attic_pay_rate_data
+        except Exception as e:
+            print(f"Error viewing attic pay rate by id: {e}")
