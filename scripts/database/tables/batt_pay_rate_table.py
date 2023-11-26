@@ -11,7 +11,7 @@ class BattPayRateTable(BaseTable):
                                     batt_pay_rate_name TEXT NOT NULL,
                                     batt_pay_rate_amount REAL NOT NULL,
                                     batt_pay_rate_description TEXT NOT NULL,
-                                    UNIQUE(batt_pay_rate_name)
+                                    UNIQUE(batt_pay_rate_id)
                                 );""")
             self.conn.commit()
             print("Batt Pay Rate table created successfully!")
