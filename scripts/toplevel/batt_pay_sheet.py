@@ -23,8 +23,12 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
         # Create the  list for variables for the checkboxes
         self.checkbox_vars = []
 
+        # Create the list to store the pay rate entries
+        self.entry_widgets = []
+
         # Create widgets using database information
         self.create_widgets()
+
 
     @staticmethod
     def create_employee_db_instance():
@@ -73,7 +77,15 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
         return rates
 
     def create_widgets(self):
+        self.create_employee_checkboxes()
+        self.create_pay_rate_entries()
 
+        # Create the calculate pay button
+        calculate_pay_button = ctk.CTkButton(self, text="Calculate Pay", font=self.font, command=self.calculate_pay)
+        calculate_pay_button.grid(row=11, column=0, padx=10, pady=10)
+
+
+    def create_employee_checkboxes(self):
         # Create checkboxes for each employee
         for i, employee in enumerate(self.employees):
             if employee:
@@ -90,6 +102,7 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
                                            command=self.checkbox_clicked)
                 checkbox.grid(row=i, column=0, padx=10, pady=10)
 
+    def create_pay_rate_entries(self):
         # Create the label and entry for the bay pay rate widgets
         for i, rate in enumerate(self.rates):
             if rate:
@@ -99,11 +112,25 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
                 entry = ctk.CTkEntry(self)
                 entry.grid(row=i, column=2, padx=10, pady=10)
 
+                # Store the entry widgets in a list
+                self.entry_widgets.append(entry)
 
     def checkbox_clicked(self):
         for i, checkbox_var in enumerate(self.checkbox_vars):
             if checkbox_var.get() == 1:
                 print(f"Checkbox {i + 1} is checked.")
+
+    def get_entry_values(self, index):
+        return self.entry_widgets[index].get()
+
+# todo finish this method so all the pay rates are calculated
+    def calculate_pay(self):
+        total_pay = 0
+        entry_value = float(self.get_entry_values(0))
+        rate = float(self.rates[0][2])  # Assuming the rate is stored in the third column of the rates list
+        total_pay += entry_value * rate
+        print(total_pay)
+
 
 
     def on_closing(self):

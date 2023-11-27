@@ -52,7 +52,7 @@ def create_database():
     batt_pay_rate_table.create_table()
 
     print("Adding batt pay rates...")
-    batt_pay_rate_table.add_batt_pay_rate("Pay Rate 1", 5, "Pay Rate 1 Description")
+    batt_pay_rate_table.add_batt_pay_rate("Pay Rate 1", 0.09, "Pay Rate 1 Description")
     batt_pay_rate_table.add_batt_pay_rate("Pay Rate 2", 5, "Pay Rate 2 Description")
     batt_pay_rate_table.add_batt_pay_rate("Pay Rate 3", 5, "Pay Rate 3 Description")
     batt_pay_rate_table.add_batt_pay_rate("Pay Rate 4", 5, "Pay Rate 4 Description")
