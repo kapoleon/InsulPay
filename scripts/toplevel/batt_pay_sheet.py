@@ -29,6 +29,20 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
         # Create widgets using database information
         self.create_widgets()
 
+        # Create instance variables for total pay and average pay entry widgets
+        self.total_pay_label = ctk.CTkLabel(self, text="Total Pay:", font=self.font)
+        self.total_pay_label.grid(row=1, column=3, padx=10, pady=10)
+
+        self.total_pay_entry = ctk.CTkEntry(self)
+        self.total_pay_entry.grid(row=1, column=4, padx=10, pady=10)
+        self.total_pay_entry.insert(0, 0)
+
+        self.average_pay_label = ctk.CTkLabel(self, text="Average Pay:", font=self.font)
+        self.average_pay_label.grid(row=2, column=3, padx=10, pady=10)
+
+        self.average_pay_entry = ctk.CTkEntry(self)
+        self.average_pay_entry.grid(row=2, column=4, padx=10, pady=10)
+        self.average_pay_entry.insert(0, 0)
 
     @staticmethod
     def create_employee_db_instance():
@@ -81,9 +95,9 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
         self.create_pay_rate_entries()
 
         # Create the calculate pay button
-        calculate_pay_button = ctk.CTkButton(self, text="Calculate Pay", font=self.font, command=self.calculate_pay)
+        calculate_pay_button = ctk.CTkButton(self, text="Calculate Pay", font=self.font,
+                                             command=self.calculate_total_pay)
         calculate_pay_button.grid(row=11, column=0, padx=10, pady=10)
-
 
     def create_employee_checkboxes(self):
         # Create checkboxes for each employee
@@ -112,6 +126,8 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
                 entry = ctk.CTkEntry(self)
                 entry.grid(row=i, column=2, padx=10, pady=10)
 
+                entry.insert(0, 0)
+
                 # Store the entry widgets in a list
                 self.entry_widgets.append(entry)
 
@@ -120,18 +136,62 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
             if checkbox_var.get() == 1:
                 print(f"Checkbox {i + 1} is checked.")
 
+        print(f"Total checked checkboxes: {self.count_checked_checkboxes()}")
+
+    def count_checked_checkboxes(self):
+        count = 0
+
+        for checkbox_var in self.checkbox_vars:
+            if checkbox_var.get() == 1:
+                count += 1
+                print(count)
+
+        return count
+
     def get_entry_values(self, index):
         return self.entry_widgets[index].get()
 
-# todo finish this method so all the pay rates are calculated
-    def calculate_pay(self):
-        total_pay = 0
-        entry_value = float(self.get_entry_values(0))
-        rate = float(self.rates[0][2])  # Assuming the rate is stored in the third column of the rates list
-        total_pay += entry_value * rate
-        print(total_pay)
+    # noinspection PyTypeChecker
+    def calculate_total_pay(self):
+        total_pays = [0] * 11  # Initialize a list to store total pay for each entry
 
+        # Iterate through each entry
+        for i in range(11):
+            # Retrieve the value of the entry and convert it to a float
+            entry_value = float(self.get_entry_values(i))
+            # Assuming the rate is stored in the third column of the rates list
+            rate = float(self.rates[i][2])
+            # Calculate and store the total pay for the current entry
+            total_pays[i] = entry_value * rate
 
+        # Print individual total pays for each entry
+        for index, total_pay in enumerate(total_pays, start=1):
+            print(f"Total pay for entry {index}: {total_pay}")
+
+        # Calculate and print the total pay for the entire job
+        job_total_pay = sum(total_pays)
+        print(f"Total pay for the job: {job_total_pay}")
+
+        # Set the value of the total pay entry widget
+        self.total_pay_entry.delete(0, 'end')  # Clear the entry
+        self.total_pay_entry.insert(0, str(job_total_pay))  # Insert the new value
+
+        # Calculate the average pay and print it
+        self.calculate_average_pay(job_total_pay, count=self.count_checked_checkboxes())
+
+    def calculate_average_pay(self, job_total_pay, count):
+        # avoid division by zero
+        if count == 0:
+            print("Cannot calculate average pay with zero entries.")
+            return
+
+        average_pay = job_total_pay / count
+
+        # Set the value of the average pay entry widget
+        self.average_pay_entry.delete(0, 'end')  # Clear the entry
+        self.average_pay_entry.insert(0, str(average_pay))
+
+        print(f"Average pay: {average_pay}")
 
     def on_closing(self):
         self.destroy()
