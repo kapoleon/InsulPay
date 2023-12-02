@@ -1,13 +1,15 @@
 import customtkinter as ctk
 from scripts.database.tables.employee_table import EmployeeTable
 from scripts.database.tables.batt_pay_rate_table import BattPayRateTable
+from scripts.database.tables.batt_pay_sheet_table import BattPaySheetTable
 
 
+# noinspection PyTypeChecker
 class BattPaySheetTopLevel(ctk.CTkToplevel):
     def __init__(self):
         super().__init__()
         self.title("Batt Pay Sheet")
-        self.geometry("800x800")
+        self.geometry("800x600")
         self.resizable(False, False)
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
 
@@ -97,7 +99,12 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
         # Create the calculate pay button
         calculate_pay_button = ctk.CTkButton(self, text="Calculate Pay", font=self.font,
                                              command=self.calculate_total_pay)
-        calculate_pay_button.grid(row=11, column=0, padx=10, pady=10)
+        calculate_pay_button.grid(row=4, column=3, columnspan=2, padx=10, pady=10)
+
+        # Create the save file button
+        save_file_button = ctk.CTkButton(self, text="Save File", font=self.font,
+                                         command=self.save_file)
+        save_file_button.grid(row=5, column=3, columnspan=2, padx=10, pady=10)
 
     def create_employee_checkboxes(self):
         # Create checkboxes for each employee
@@ -151,7 +158,6 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
     def get_entry_values(self, index):
         return self.entry_widgets[index].get()
 
-    # noinspection PyTypeChecker
     def calculate_total_pay(self):
         total_pays = [0] * 11  # Initialize a list to store total pay for each entry
 
@@ -192,6 +198,54 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
         self.average_pay_entry.insert(0, str(average_pay))
 
         print(f"Average pay: {average_pay}")
+
+    # todo: add a function to save the file and clew the entries
+    def save_file(self):
+        print("Saving file...")
+        job_name = self.get_job_name_dialog().get_input()
+
+        if job_name:
+            print(f"Saving file for Job: {job_name}")
+            self.add_pay_sheet_to_database(job_name)
+        else:
+            print("Job name not provided. File not saved.")
+
+    def get_job_name_dialog(self):
+        job_name = ctk.CTkInputDialog(text="Enter the job name:", title="Job Name")
+        return job_name
+
+    def add_pay_sheet_to_database(self, job_name):
+        batt_pay_sheet_table = BattPaySheetTable()
+        batt_pay_sheet_table.connect()
+        batt_pay_sheet_table.create_table()
+
+        # initialize list to store values for each entry
+        values = [0] * 11
+
+        # iterate through each entry
+        for i in range(11):
+            # retrieve the value of the entry and convert it to a float
+            entry_value = float(self.get_entry_values(i))
+            # store the value in the values list
+            # noinspection PyTypeChecker
+            values[i] = entry_value
+
+        # add the values to the database
+        batt_pay_sheet_table.add_batt_record(job_name=job_name,
+                                             batt_1=values[0],
+                                             batt_2=values[1],
+                                             soffit=values[2],
+                                             caulk_foam=values[3],
+                                             cellulose=values[4],
+                                             bibs_full=values[5],
+                                             bibs_hang=values[6],
+                                             bibs_staple=values[7],
+                                             bibs_blown=values[8],
+                                             bonus_amount=values[9],
+                                             other_amount=values[10])
+
+        # disconnect from the database
+        batt_pay_sheet_table.disconnect()
 
     def on_closing(self):
         self.destroy()
