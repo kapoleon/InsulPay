@@ -4,6 +4,7 @@ from scripts.database.tables.employee_table import EmployeeTable
 from scripts.database.tables.batt_pay_rate_table import BattPayRateTable
 from scripts.database.tables.attic_pay_rate_table import AtticPayRateTable
 from scripts.database.tables.foam_pay_rate_table import FoamPayRateTable
+from scripts.database.tables.batt_pay_sheet_table import BattPaySheetTable
 
 
 def check_and_run():
@@ -114,3 +115,13 @@ def create_database():
 
     print("Disconnecting from database...")
     foam_pay_rate_table.disconnect()
+
+    # create the batt pay sheet table
+    print("Creating batt pay sheet table...")
+    batt_pay_sheet_table = BattPaySheetTable()
+    print("Connecting to database...")
+    batt_pay_sheet_table.connect()
+    print("Creating table...")
+    batt_pay_sheet_table.create_table()
+    print("Disconnecting from database...")
+    batt_pay_sheet_table.disconnect()

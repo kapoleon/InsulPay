@@ -2,6 +2,8 @@ import customtkinter as ctk
 from scripts.database.tables.employee_table import EmployeeTable
 from scripts.database.tables.batt_pay_rate_table import BattPayRateTable
 from scripts.database.tables.batt_pay_sheet_table import BattPaySheetTable
+import tkinter as tk
+from tkinter import messagebox
 
 
 # noinspection PyTypeChecker
@@ -199,7 +201,6 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
 
         print(f"Average pay: {average_pay}")
 
-    # todo: add a function to save the file and clew the entries
     def save_file(self):
         print("Saving file...")
         job_name = self.get_job_name_dialog().get_input()
@@ -207,10 +208,18 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
         if job_name:
             print(f"Saving file for Job: {job_name}")
             self.add_pay_sheet_to_database(job_name)
+            self.clear_entries()
+
+            # message box to confirm file was saved
+            messagebox.showinfo("File Saved", f"File for Job: {job_name} saved.")
+
+            self.on_closing()
+
         else:
             print("Job name not provided. File not saved.")
 
-    def get_job_name_dialog(self):
+    @staticmethod
+    def get_job_name_dialog():
         job_name = ctk.CTkInputDialog(text="Enter the job name:", title="Job Name")
         return job_name
 
@@ -246,6 +255,18 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
 
         # disconnect from the database
         batt_pay_sheet_table.disconnect()
+
+    def clear_entries(self):
+        for entry in self.entry_widgets:
+            entry.delete(0, 'end')
+
+            entry.insert(0, 0)
+
+        self.total_pay_entry.delete(0, 'end')
+        self.total_pay_entry.insert(0, 0)
+
+        self.average_pay_entry.delete(0, 'end')
+        self.average_pay_entry.insert(0, 0)
 
     def on_closing(self):
         self.destroy()

@@ -20,7 +20,7 @@ class BattPaySheetTable(BaseTable):
                                     batt_pay_sheet_bonus_amount REAL NOT NULL,
                                     batt_pay_sheet_other_amount REAL NOT NULL,
                                                                     
-                                    UNIQUE(batt_pay_sheet_job_name)
+                                    UNIQUE(batt_pay_sheet_id)
                                 );""")
             self.conn.commit()
             print("Batt Pay Sheet table created successfully!")
