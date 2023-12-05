@@ -16,7 +16,7 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
 
         # Create the font
-        self.font = ctk.CTkFont("Roboto", 15)
+        self.font = ctk.CTkFont("Roboto", 18)
 
         # Retrieve employee information
         self.employees = self.create_employee_db_instance()
@@ -267,6 +267,7 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
 
         self.average_pay_entry.delete(0, 'end')
         self.average_pay_entry.insert(0, 0)
+
 
     def on_closing(self):
         self.destroy()
