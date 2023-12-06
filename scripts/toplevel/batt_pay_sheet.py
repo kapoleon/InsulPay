@@ -156,7 +156,6 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
         for checkbox_var in self.checkbox_vars:
             if checkbox_var.get() == 1:
                 count += 1
-                print(count)
 
         return count
 
@@ -204,7 +203,6 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
 
         print(f"Average pay: {average_pay}")
 
-    # TODO  Add all functions for saving the file
     def save_file(self):
         print("Saving file...")
         job_name = self.get_job_name_dialog().get_input()
@@ -214,6 +212,7 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
             self.add_pay_sheet_to_database(job_name)
             self.copy_pay_sheet_template()
             self.create_pay_spreadsheet(job_name)
+            self.append_pay_spreadsheet(job_name)
             self.clear_entries()
 
             # message box to confirm file was saved
@@ -276,6 +275,7 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
 
     @staticmethod
     def copy_pay_sheet_template():
+        print("Copying template file...")
         # Get the path of the template file
         template_path = os.path.join(os.getcwd(), "templates", "Batt Pay Sheet.xlsx")
         print(f"Template path: {template_path}")
@@ -286,31 +286,58 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
 
         # Copy the template file to the destination file
         shutil.copyfile(template_path, destination_path)
+        print("Template file copied.")
 
-    def create_pay_spreadsheet(self, job_name):
+    @staticmethod
+    def create_pay_spreadsheet(job_name):
         file_name = f"{job_name}.xlsx"
 
+        print("Creating pay spreadsheet...")
         os.rename(os.path.join(os.getcwd(), "temp", "pay sheets", "batt pay sheets", "Batt Pay Sheet.xlsx"),
                   os.path.join(os.getcwd(), "temp", "pay sheets", "batt pay sheets", file_name))
 
         workbook = openpyxl.load_workbook(os.path.join(os.getcwd(), "temp", "pay sheets", "batt pay sheets", file_name))
         sheet = workbook.active
 
-        # append the employee names to the spreadsheet
-        for i, employee in enumerate(self.employees):
-            if employee:
-                sheet.cell(row=i + 5, column=1).value = f"{employee[1]} {employee[2]}"
-                print(f"Employee {i + 1} name added to spreadsheet.")
-
-            # add the job name to the spreadsheet
-            sheet['A2'] = job_name
+        # add the job name to the spreadsheet
+        sheet['A2'] = job_name
 
         workbook.save(os.path.join(os.getcwd(), "temp", "pay sheets", "batt pay sheets", file_name))
 
         workbook.close()
 
-    def append_pay_spreadsheet(self):
-        pass
+    def append_pay_spreadsheet(self, job_name):
+        file_name = f"{job_name}.xlsx"
+
+        # Load the existing workbook
+        workbook = openpyxl.load_workbook(os.path.join(os.getcwd(), "temp", "pay sheets", "batt pay sheets", file_name))
+        sheet = workbook.active
+
+        # Append the employee names and calculated values for checked checkboxes
+        for i, (employee, checkbox_var) in enumerate(zip(self.employees, self.checkbox_vars)):
+            if employee and checkbox_var.get() == 1:
+                # Append employee name to the spreadsheet
+                sheet.cell(row=i + 5, column=1).value = f"{employee[1]} {employee[2]}"
+                print(f"Employee {i + 1} name added to spreadsheet.")
+
+                # append the calculated value to the spreadsheet
+                for j in range(11):
+                    # retrieve the value of the entry and convert it to a float
+                    entry_value = float(self.get_entry_values(j))
+                    # Assuming the rate is stored in the third column of the rates list
+                    rate = float(self.rates[j][2])
+                    # Calculate and store the total pay for the current entry
+                    total_pay = entry_value * rate / self.count_checked_checkboxes()
+
+                    # append the total pay to the spreadsheet
+                    sheet.cell(row=i + 5, column=j + 2).value = total_pay
+                    print(f"Total pay for employee {i + 1} added to spreadsheet.")
+
+        # Save the workbook
+        workbook.save(os.path.join(os.getcwd(), "temp", "pay sheets", "batt pay sheets", file_name))
+
+        # Close the workbook
+        workbook.close()
 
     def on_closing(self):
         self.destroy()
