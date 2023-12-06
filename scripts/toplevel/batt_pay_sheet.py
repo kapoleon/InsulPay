@@ -4,6 +4,9 @@ from scripts.database.tables.batt_pay_rate_table import BattPayRateTable
 from scripts.database.tables.batt_pay_sheet_table import BattPaySheetTable
 import tkinter as tk
 from tkinter import messagebox
+import shutil
+import os
+import openpyxl
 
 
 # noinspection PyTypeChecker
@@ -201,6 +204,7 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
 
         print(f"Average pay: {average_pay}")
 
+    # TODO  Add all functions for saving the file
     def save_file(self):
         print("Saving file...")
         job_name = self.get_job_name_dialog().get_input()
@@ -208,6 +212,8 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
         if job_name:
             print(f"Saving file for Job: {job_name}")
             self.add_pay_sheet_to_database(job_name)
+            self.copy_pay_sheet_template()
+            self.create_pay_spreadsheet(job_name)
             self.clear_entries()
 
             # message box to confirm file was saved
@@ -268,6 +274,43 @@ class BattPaySheetTopLevel(ctk.CTkToplevel):
         self.average_pay_entry.delete(0, 'end')
         self.average_pay_entry.insert(0, 0)
 
+    @staticmethod
+    def copy_pay_sheet_template():
+        # Get the path of the template file
+        template_path = os.path.join(os.getcwd(), "templates", "Batt Pay Sheet.xlsx")
+        print(f"Template path: {template_path}")
+
+        # Get the path of the destination file
+        destination_path = os.path.join(os.getcwd(), "temp", "pay sheets", "batt pay sheets", "Batt Pay Sheet.xlsx")
+        print(f"Destination path: {destination_path}")
+
+        # Copy the template file to the destination file
+        shutil.copyfile(template_path, destination_path)
+
+    def create_pay_spreadsheet(self, job_name):
+        file_name = f"{job_name}.xlsx"
+
+        os.rename(os.path.join(os.getcwd(), "temp", "pay sheets", "batt pay sheets", "Batt Pay Sheet.xlsx"),
+                  os.path.join(os.getcwd(), "temp", "pay sheets", "batt pay sheets", file_name))
+
+        workbook = openpyxl.load_workbook(os.path.join(os.getcwd(), "temp", "pay sheets", "batt pay sheets", file_name))
+        sheet = workbook.active
+
+        # append the employee names to the spreadsheet
+        for i, employee in enumerate(self.employees):
+            if employee:
+                sheet.cell(row=i + 5, column=1).value = f"{employee[1]} {employee[2]}"
+                print(f"Employee {i + 1} name added to spreadsheet.")
+
+            # add the job name to the spreadsheet
+            sheet['A2'] = job_name
+
+        workbook.save(os.path.join(os.getcwd(), "temp", "pay sheets", "batt pay sheets", file_name))
+
+        workbook.close()
+
+    def append_pay_spreadsheet(self):
+        pass
 
     def on_closing(self):
         self.destroy()

@@ -4,6 +4,9 @@ import sqlite3
 import tkinter as tk
 import tkinter.ttk as ttk
 from tkinter import messagebox, filedialog
+import os
+import shutil
+import openpyxl
 
 # Import the custom menu
 from scripts.menu.menu_manager import MenuManager
